@@ -1,0 +1,24 @@
+apiVersion: apps/v1beta1 # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: busyboxplus-curl-deployment
+  labels:
+    app: busyboxplus-curl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: busyboxplus-curl
+  template:
+    metadata:
+      labels:
+        app: busyboxplus-curl
+    spec:
+      containers:
+      - image: radial/busyboxplus:curl
+        command:
+          - sleep
+          - "3600"
+        imagePullPolicy: IfNotPresent
+        name: busyboxplus
+      restartPolicy: Always
